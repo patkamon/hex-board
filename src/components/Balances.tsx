@@ -25,8 +25,10 @@ export function Balances(account :{account: string}) {
   function mapBalance(list : never[]){
     return list.map((l,index)=>{
       return  l.contract_name != null ? <div key={l.contract_name + index}>
-      {l.contract_name}<br/>
-      {l.balance}
+       <img src={l.logo_url} width={40}></img>
+     {l.contract_name}<br/>
+      {l.balance / 10 ** l.contract_decimals}
+
       </div> : <></>
  })
   }
