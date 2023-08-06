@@ -2,7 +2,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { getAccount } from '@wagmi/core'
 
-import { Attestooooooor, Balances } from "./components";
+import { Balances } from "./components";
 
 export function App() {
   /**
@@ -11,7 +11,6 @@ export function App() {
    */
   const { isConnected } = useAccount();
   const account = getAccount()
-  console.log(account)
 
   return (
     <>

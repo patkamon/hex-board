@@ -22,11 +22,21 @@ export function Balances(account :{account: string}) {
       });
     }
 
+  function mapBalance(list : never[]){
+    return list.map((l,index)=>{
+      return  l.contract_name != null ? <div key={l.contract_name + index}>
+      {l.contract_name}<br/>
+      {l.balance}
+      </div> : <></>
+ })
+  }
+
+
   useEffect(()=>{
     fetchData("optimism-goerli",account.account, setOpList).catch(console.error);
     fetchData("matic-mumbai",account.account,  setPolyList).catch(console.error);
     fetchData("base-testnet",account.account,  setBaseList).catch(console.error);
-    fetchData("zora-testne",account.account,  setZoraList).catch(console.error);
+    fetchData("zora-testnet",account.account,  setZoraList).catch(console.error);
 
 
   },[])
@@ -35,37 +45,14 @@ export function Balances(account :{account: string}) {
     <div>
       <h2>Balances</h2>
 
-      <h2>OPTIMISM GOERLI</h2>
-      {oplist.map((l,index)=>{
-           return  l.contract_name != null ? <div key={l.contract_name + index}>
-           {l.contract_name}<br/>
-           {l.balance}
-           </div> : <></>
-      })}
+      <h2>OPTIMISM GOERLI</h2>{mapBalance(oplist) }
 
-      <h2>POLYGON MUMBAI</h2>
-      {polylist.map((l,index)=>{
-            return  l.contract_name != null ? <div key={l.contract_name + index}>
-              {l.contract_name}<br/>
-              {l.balance}
-              </div> : <></>
-      })}
+      <h2>POLYGON MUMBAI</h2> {mapBalance(polylist)}
 
-      <h2>BASE</h2>
-      {baselist.map((l,index)=>{
-            return  l.contract_name != null ? <div key={l.contract_name + index}>
-              {l.contract_name}<br/>
-              {l.balance}
-              </div> : <></>
-      })}
 
-      <h2>ZORA</h2>
-      {zoralist.map((l,index)=>{
-            return  l.contract_name != null ? <div key={l.contract_name + index}>
-              {l.contract_name}<br/>
-              {l.balance}
-              </div> : <></>
-      })}
+      <h2>BASE</h2>{mapBalance(baselist) }
+
+      <h2>ZORA</h2>{mapBalance(zoralist) }
 
     </div>
   );
