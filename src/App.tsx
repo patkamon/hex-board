@@ -24,9 +24,7 @@ export function App() {
       {isConnected && (
         <>
           <hr />
-          <Attestooooooor />
           <Balances account={account.address}/>
-
           <hr />
         </>
       )}
