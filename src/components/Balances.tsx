@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
-
+import omniMessage from '../../contracts/out/omni.sol/OmniMessage.json'
+import { ethers } from 'ethers'
 
 
 export function Balances(account :{account: string}) {
@@ -9,6 +9,23 @@ export function Balances(account :{account: string}) {
   const [polylist, setPolyList] = useState([])
   const [baselist, setBaseList] = useState([])
   const [zoralist, setZoraList] = useState([])
+
+  async function onGetEndpoint(){
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner();
+      // const sessionAddress = getSessionAddress(network.factoryAddress)
+			const contract = new ethers.Contract( "0x4637e0249e4A8bB885ee891674F42B08A04d74f1", omniMessage.abi, provider)
+			try {
+				const data = await contract.lzEndpoint()
+				// fix this to decimal
+        console.log(data)
+      } catch (err) {
+        console.log("Error: ", err)
+			}
+		}
+	}
+
 
   const fetchData = async (chain : string, address: string, setstate: React.Dispatch<React.SetStateAction<never[]>> ) => {
     let headers = new Headers();
@@ -55,6 +72,8 @@ export function Balances(account :{account: string}) {
       <h2>BASE</h2>{mapBalance(baselist) }
 
       <h2>ZORA</h2>{mapBalance(zoralist) }
+
+      <button onClick={()=>onGetEndpoint()}>HELLO</button>
 
     </div>
   );
