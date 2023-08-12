@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,31 +30,35 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'Historical portfolio value over 30D on Optimism',
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
+
+export function LineChart({time, tk1, tk2}) {
+  // , setstate: React.Dispatch<React.SetStateAction<never[]>>
+
+  let labels = time
+let data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: [5, 6, 7],
+      label: 'RareTron.io',
+      data: tk1,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
     {
-      label: 'Dataset 2',
-      data: [5, 6, 7],
+      label: 'Ether',
+      data: tk2,
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
-};
+}
 
-export function LineChart() {
   return <Line options={options} data={data} />;
 }

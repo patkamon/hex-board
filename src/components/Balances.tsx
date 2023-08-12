@@ -37,15 +37,14 @@ export function Balances(account :{account: string}) {
     const data = await fetch(`https://api.covalenthq.com/v1/${chain}/address/${address}/balances_v2/?`, {method: 'GET', headers: headers})
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data)
       setstate(data.data!.items)
       });
     }
 
   function mapBalance(list : never[]){
     return list.map((l,index)=>{
-      return  l.contract_name != null ? <div className="flex justify-around mx-80" key={l.contract_name + index}>
-      <div className="flex mr-auto">
+      return  l.contract_name != null ? <div className="flex justify-around mx-80 hover:bg-yellow-50" key={l.contract_name + index}>
+      <div className="flex mr-auto ">
 
       <img src={l.contract_name == "Ether" || l.contract_name == "Matic Token" || l.contract_name == "ETH" ? l.logo_url : "../../logo.png"} alt={l.logo_url} width={22}></img>
 
@@ -75,12 +74,46 @@ export function Balances(account :{account: string}) {
 
   },[])
 
+
+
+  // line chart
+
+
+  const [tk, setTk] = useState([])
+  const [time, setTime] = useState([])
+  const [tk2, setTk2] = useState([])
+
+  const fetchDataLine = async (chain : string, address: string ) => {
+    let headers = new Headers();
+    // EXPOSE API KEY
+    headers.set('Authorization', "Bearer cqt_rQFY9PtDfbqGrmqD7qkbqC9R3ccJ")
+
+
+    const data = await fetch(` https://api.covalenthq.com/v1/optimism-goerli/address/${address}/portfolio_v2/`, {method: 'GET', headers: headers})
+    .then((resp) => resp.json())
+    .then((data) => {
+      let timeI = data.data.items[0].holdings.map((x)=>x.timestamp.slice(0,10))
+      let list1 = data.data.items[0].holdings.map((x)=>x.close.balance)
+      let list2 = data.data.items[1].holdings.map((x)=>x.close.balance)
+      setTk(list1)
+      setTk2(list2)
+      setTime(timeI)
+      });
+    }
+
+
+    useEffect(()=>{
+      fetchDataLine("optimism-goerli",account.account).catch(console.error);
+
+
+    },[])
+
   return (
     <div >
 <div className="flex justify-between gap-2">
 <div className="bg-cyan-100 h-80 w-[32%]  my-2 rounded-2xl flex mb-4">
   <div className="mx-8 my-8 h-full w-full">
-    <LineChart />
+    {/* <LineChart time={time} tk1={tk} tk2={tk2}/> */}
   </div>
 </div>
 
@@ -94,7 +127,7 @@ export function Balances(account :{account: string}) {
 
 <div className="bg-cyan-100 h-80 w-[32%]   my-2 rounded-2xl flex mb-4">
   <div className="mx-8 my-8 h-full w-full">
-    <LineChart />
+  <LineChart time={time} tk1={tk} tk2={tk2}/>
   </div>
 </div>
 
@@ -103,10 +136,10 @@ export function Balances(account :{account: string}) {
 
       <div className="bg-cyan-100  h-8  my-2 rounded-2xl flex justify-between mb-4">
           <div className="opacity-100 pt-1 border-black  w-1/5 rounded-2xl text-center bg-white"> All </div>
-          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1"> Optimism </div>
-          <div className="opacity-70  text-center  w-1/5 rounded-2xl pt-1"> Base </div>
-          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1"> Zora </div>
-          <div className="opacity-70  text-center  w-1/5 rounded-2xl  pt-1"> Polygon </div>
+          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1 hover:bg-yellow-50"> Optimism </div>
+          <div className="opacity-70  text-center  w-1/5 rounded-2xl pt-1 hover:bg-yellow-50"> Base </div>
+          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1 hover:bg-yellow-50"> Zora </div>
+          <div className="opacity-70  text-center  w-1/5 rounded-2xl  pt-1 hover:bg-yellow-50"> Polygon </div>
 
       </div>
 
