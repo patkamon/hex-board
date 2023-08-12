@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { LineChart } from "./Line";
 import { PieChart } from "./Pie";
 import { fetchTransaction } from "wagmi/dist/actions";
+import { Popup } from "./Popup";
 
 
 
@@ -76,7 +77,7 @@ export function Balances(account :{account: string}) {
       </div>
 
       <div className="flex gap-2">
-      <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Send</button>
+      <Popup/>
          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Swap</button>
          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Bridge</button>
       </div>
@@ -223,7 +224,7 @@ export function Balances(account :{account: string}) {
     </div>
 
 
-    
+
 
     </div>
 
