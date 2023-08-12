@@ -3,6 +3,7 @@ import omniMessage from '../../contracts/out/omni.sol/OmniMessage.json'
 import { ethers } from 'ethers'
 import { LineChart } from "./Line";
 import { PieChart } from "./Pie";
+import { fetchTransaction } from "wagmi/dist/actions";
 
 
 
@@ -12,6 +13,8 @@ export function Balances(account :{account: string}) {
   const [polylist, setPolyList] = useState([])
   const [baselist, setBaseList] = useState([])
   const [zoralist, setZoraList] = useState([])
+
+  const [trans, setTrans] = useState([])
 
 
   async function onGetEndpoint(){
@@ -30,6 +33,18 @@ export function Balances(account :{account: string}) {
 		}
 	}
 
+  const fetchTransaction = async (address: string) => {
+    let headers = new Headers();
+    // EXPOSE API KEY
+    headers.set('Authorization', "Bearer cqt_rQFY9PtDfbqGrmqD7qkbqC9R3ccJ")
+
+    const data = await fetch(`  https://api.covalenthq.com/v1/optimism-goerli/address/${address}/transactions_v3/`, {method: 'GET', headers: headers})
+    .then((resp) => resp.json())
+    .then((data) => {
+      setTrans(data.data.items.slice(0,4))
+      });
+    }
+
 
   const fetchData = async (chain : string, address: string, setstate: React.Dispatch<React.SetStateAction<never[]>> ) => {
     let headers = new Headers();
@@ -39,6 +54,7 @@ export function Balances(account :{account: string}) {
     .then((resp) => resp.json())
     .then((data) => {
       setstate(data.data!.items)
+
       });
     }
 
@@ -86,6 +102,8 @@ export function Balances(account :{account: string}) {
     fetchData("base-testnet",account.account,  setBaseList).catch(console.error);
     fetchData("zora-testnet",account.account,  setZoraList).catch(console.error);
 
+    fetchTransaction(account.account)
+
 
   },[])
 
@@ -128,8 +146,16 @@ export function Balances(account :{account: string}) {
     <div >
 <div className="flex justify-between gap-2">
 <div className="bg-cyan-100 h-80 w-[32%]  my-2 rounded-2xl flex mb-4">
-  <div className="mx-8 my-8 h-full w-full">
-    {/* <LineChart time={time} tk1={tk} tk2={tk2}/> */}
+  <div className="mx-8 my-2 h-full w-full">
+    {trans.map((t)=>{
+      return(<div className={t.successful ? " border mt-3 rounded-2xl bg-green-100": " border mt-6 rounded-2xl bg-red-50" } >
+        <div className="flex justify-center">{t.to_address}</div>
+        <div className="flex justify-start w-3/4 mx-auto">
+          <div>{t.block_signed_at}</div>
+          <div className={t.successful ? "text-green-600 ml-auto": "text-red-500 ml-auto" }>status: {t.successful ? "SUCCESS": "FAIL"}</div>
+        </div>
+        </div>)
+    })}
   </div>
 </div>
 

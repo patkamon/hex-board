@@ -19,7 +19,7 @@ export function App() {
 
 <div className="flex pt-8">
     <img src="./logo.png" width={40}></img>
-      <h1 className="text-3xl ml-2 mr-12 font-semibold text-blue-700">OP Starter Project</h1>
+      <h1 className="text-3xl ml-2 mr-12 font-semibold text-blue-700">HEX BOARD</h1>
 
       {/** @see https://www.rainbowkit.com/docs/connect-button */}
 
