@@ -3,6 +3,7 @@ import { useAccount } from "wagmi";
 import { getAccount } from '@wagmi/core'
 
 import { Balances } from "./components";
+import "./index.css";
 
 export function App() {
   /**
@@ -13,20 +14,29 @@ export function App() {
   const account = getAccount()
 
   return (
-    <>
-      <h1>OP Starter Project</h1>
+    <div className="bg-gradient-to-b from-cyan-300 to-cyan-400">
+      <div className="mx-24">
+
+<div className="flex pt-8">
+    <img src="./logo.png" width={40}></img>
+      <h1 className="text-3xl ml-2 mr-12 font-semibold text-blue-700">OP Starter Project</h1>
 
       {/** @see https://www.rainbowkit.com/docs/connect-button */}
-      <ConnectButton />
+
+      <div className="ml-auto">
+        <ConnectButton />
+        </div>
+</div>
 
 
       {isConnected && (
         <>
-          <hr />
+          <div className="mt-8"/>
           <Balances account={account.address}/>
-          <hr />
+          <div />
         </>
       )}
-    </>
+      </div>
+    </div>
   );
 }

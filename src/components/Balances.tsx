@@ -41,13 +41,25 @@ export function Balances(account :{account: string}) {
 
   function mapBalance(list : never[]){
     return list.map((l,index)=>{
-      return  l.contract_name != null ? <div key={l.contract_name + index}>
-       <img src={l.logo_url} width={40}></img>
-     {l.contract_name}<br/>
-      {l.balance / 10 ** l.contract_decimals}
+      return  l.contract_name != null ? <div className="flex justify-around mx-80" key={l.contract_name + index}>
+      <div className="flex mr-auto">
+
+      <img src={l.contract_name == "Ether" || l.contract_name == "Matic Token" || l.contract_name == "ETH" ? l.logo_url : "../../logo.png"} alt={l.logo_url} width={22}></img>
+
+      {l.contract_name} </div>
+      <div>{l.balance / 10 ** l.contract_decimals}</div>
 
       </div> : <></>
+
  })
+  }
+
+  function chain(st, f, list){
+    return (     <div className="bg-cyan-100 pb-6 pt-4 my-3 rounded-2xl ">
+    <h2 className="ml-8 text-blue-700 font-bold">{st}</h2>
+    <hr className="mb-2  mx-8"></hr>
+    {f(list)}
+    </div>)
   }
 
 
@@ -61,19 +73,36 @@ export function Balances(account :{account: string}) {
   },[])
 
   return (
-    <div>
-      <h2>Balances</h2>
+    <div >
+      <div className="bg-cyan-100  h-8  my-2 rounded-2xl flex justify-between mb-4">
+          <div className="opacity-100 pt-1 border-black  w-1/5 rounded-2xl text-center bg-white"> All </div>
+          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1"> Optimism </div>
+          <div className="opacity-70  text-center  w-1/5 rounded-2xl pt-1"> Base </div>
+          <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1"> Zora </div>
+          <div className="opacity-70  text-center  w-1/5 rounded-2xl  pt-1"> Polygon </div>
 
-      <h2>OPTIMISM GOERLI</h2>{mapBalance(oplist) }
+      </div>
 
-      <h2>POLYGON MUMBAI</h2> {mapBalance(polylist)}
+          <div className="bg-cyan-100 pb-2 pt-2 my-3 rounded-2xl ">
+    <h2 className="ml-8 text-black font-bold">{"Chain name"}</h2>
+    <div className="flex justify-around mx-80 font-bold -mt-6">
+      <div className="flex mr-auto">
+      {/* <img src={} width={22}></img> */}
+       {"Name"} </div>
+      <div>{"Balances"}</div>
+
+      </div>
+
+    </div>
+
+     {chain("OPTIMISM", mapBalance, oplist)}
+        {chain("BASE", mapBalance, baselist)}
+        {chain("ZORA", mapBalance, zoralist)}
+        {chain("POLYGON", mapBalance, polylist)}
 
 
-      <h2>BASE</h2>{mapBalance(baselist) }
 
-      <h2>ZORA</h2>{mapBalance(zoralist) }
-
-      <button onClick={()=>onGetEndpoint()}>HELLO</button>
+      <button className="" onClick={()=>onGetEndpoint()}>HELLO</button>
 
     </div>
   );
