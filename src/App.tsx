@@ -2,7 +2,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { getAccount } from '@wagmi/core'
 
-import { Balances } from "./components";
+import { Balances, LineChart } from "./components";
 import "./index.css";
 
 export function App() {

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import omniMessage from '../../contracts/out/omni.sol/OmniMessage.json'
 import { ethers } from 'ethers'
+import { LineChart } from "./Line";
+import { PieChart } from "./Pie";
+
 
 
 export function Balances(account :{account: string}) {
@@ -74,6 +77,30 @@ export function Balances(account :{account: string}) {
 
   return (
     <div >
+<div className="flex justify-between gap-2">
+<div className="bg-cyan-100 h-80 w-[32%]  my-2 rounded-2xl flex mb-4">
+  <div className="mx-8 my-8 h-full w-full">
+    <LineChart />
+  </div>
+</div>
+
+<div className="bg-cyan-100 h-80 w-[32%] -pr-2 my-2 rounded-2xl flex  mb-4 ">
+<div className="my-2 mx-2 h-4/5 w-full mt-8">
+    <PieChart  />
+
+  </div>
+</div>
+
+
+<div className="bg-cyan-100 h-80 w-[32%]   my-2 rounded-2xl flex mb-4">
+  <div className="mx-8 my-8 h-full w-full">
+    <LineChart />
+  </div>
+</div>
+
+</div>
+
+
       <div className="bg-cyan-100  h-8  my-2 rounded-2xl flex justify-between mb-4">
           <div className="opacity-100 pt-1 border-black  w-1/5 rounded-2xl text-center bg-white"> All </div>
           <div className="opacity-70  text-center   w-1/5 rounded-2xl pt-1"> Optimism </div>
