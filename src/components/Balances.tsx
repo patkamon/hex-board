@@ -43,8 +43,9 @@ export function Balances(account :{account: string}) {
     }
 
   function mapBalance(list : never[]){
+    console.log(list)
     return list.map((l,index)=>{
-      return  l.contract_name != null ? <div className="flex justify-around mx-[40vh] mt-1 hover:bg-yellow-50" key={l.contract_name + index}>
+      return  l.contract_name != null ? <div className="flex justify-around ml-[40vh] mr-[30vh] mt-1 hover:bg-yellow-50" key={l.contract_name + index}>
       <div className="flex mr-auto w-1/3 " >
 
       <img src={l.contract_name == "Ether" || l.contract_name == "Matic Token" || l.contract_name == "ETH" ? l.logo_url : "../../logo.png"} alt={l.logo_url} width={22}></img>
@@ -57,7 +58,13 @@ export function Balances(account :{account: string}) {
       </div>
 
       </div>
-      <button className="ml-auto" >SEND</button>
+
+      <div className="flex gap-2">
+      <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Send</button>
+         <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Swap</button>
+         <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Bridge</button>
+      </div>
+
 
       </div> : <></>
 
@@ -65,8 +72,8 @@ export function Balances(account :{account: string}) {
   }
 
   function chain(st, f, list){
-    return (     <div className="bg-cyan-100 pb-6 pt-4 my-3 rounded-2xl ">
-    <h2 className="ml-8 text-blue-700 font-bold">{st}</h2>
+    return (     <div className="bg-cyan-100 pb-6 pt-4  my-3 rounded-2xl ">
+    <h2 className="ml-32 text-blue-700 font-bold">{st}</h2>
     <hr className="mb-2  mx-8"></hr>
     {f(list)}
     </div>)
@@ -154,13 +161,15 @@ export function Balances(account :{account: string}) {
 
 
 
-          <div className="bg-cyan-100 pb-2 pt-2 my-3 rounded-2xl">
-    <h2 className="ml-8 text-black font-bold">{"Chain name"}</h2>
-    <div className="flex justify-around mx-80 font-bold -mt-6">
-      <div className="flex mr-auto">
-      {/* <img src={} width={22}></img> */}
+          <div className="bg-cyan-100 pb-2 pt-2 my-3  rounded-2xl">
+    <h2 className="ml-32 text-black font-bold">{"Chain name"}</h2>
+    <div className="flex justify-around mx-[40vh] font-bold -mt-6">
+      <div className="flex mr-auto w-1/3">
        {"Name"} </div>
-      <div>{"Balances"}</div>
+       <div className="flex justify-end w-1/2">
+              <div className="mr-auto">{"Balances"}</div>
+       </div>
+      <div className="ml-auto" >{"Manange"}</div>
 
       </div>
 
