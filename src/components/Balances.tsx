@@ -148,7 +148,7 @@ export function Balances(account :{account: string}) {
 <div className="bg-cyan-100 h-80 w-[32%]  my-2 rounded-2xl flex mb-4">
   <div className="mx-8 my-2 h-full w-full">
     {trans.map((t)=>{
-      return(<div className={t.successful ? " border mt-3 rounded-2xl bg-green-100": " border mt-6 rounded-2xl bg-red-50" } >
+      return(<div className={t.successful ? "mt-3 rounded-2xl bg-green-100": " border mt-6 rounded-2xl bg-red-50" } >
         <div className="flex justify-center">{t.to_address}</div>
         <div className="flex justify-start w-3/4 mx-auto">
           <div>{t.block_signed_at}</div>
@@ -211,10 +211,22 @@ export function Balances(account :{account: string}) {
         {chain("POLYGON", mapBalance, polylist)}
 
 
+    <div className="pt-24 pb-16 flex gap-4 justify-center text-gray-600">
+        <div className="hover:text-gray-200">Ecosystem</div>
+        <div className="hover:text-gray-200">Community</div>
+        <div className="hover:text-gray-200">Governance</div>
+        <div className="hover:text-gray-200"> Developers</div>
+        <div className="hover:text-gray-200"> Blog</div>
+        <div className="hover:text-gray-200">FAQ</div>
+        <div className="hover:text-gray-200">Policy</div>
+        <div className="hover:text-gray-200">Security</div>
+    </div>
 
-      <button className="" onClick={()=>onGetEndpoint()}>HELLO</button>
+
+    
 
     </div>
+
   );
 }
 
