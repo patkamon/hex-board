@@ -13,6 +13,7 @@ export function Balances(account :{account: string}) {
   const [baselist, setBaseList] = useState([])
   const [zoralist, setZoraList] = useState([])
 
+
   async function onGetEndpoint(){
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -43,13 +44,20 @@ export function Balances(account :{account: string}) {
 
   function mapBalance(list : never[]){
     return list.map((l,index)=>{
-      return  l.contract_name != null ? <div className="flex justify-around mx-80 hover:bg-yellow-50" key={l.contract_name + index}>
-      <div className="flex mr-auto ">
+      return  l.contract_name != null ? <div className="flex justify-around mx-[40vh] mt-1 hover:bg-yellow-50" key={l.contract_name + index}>
+      <div className="flex mr-auto w-1/3 " >
 
       <img src={l.contract_name == "Ether" || l.contract_name == "Matic Token" || l.contract_name == "ETH" ? l.logo_url : "../../logo.png"} alt={l.logo_url} width={22}></img>
 
-      {l.contract_name} </div>
-      <div>{l.balance / 10 ** l.contract_decimals}</div>
+      {l.contract_name}
+      </div>
+      <div className="flex justify-end w-1/2">
+
+      <div className="mr-auto">{l.balance / 10 ** l.contract_decimals}
+      </div>
+
+      </div>
+      <button className="ml-auto" >SEND</button>
 
       </div> : <></>
 
@@ -108,6 +116,7 @@ export function Balances(account :{account: string}) {
 
     },[])
 
+
   return (
     <div >
 <div className="flex justify-between gap-2">
@@ -119,7 +128,7 @@ export function Balances(account :{account: string}) {
 
 <div className="bg-cyan-100 h-80 w-[32%] -pr-2 my-2 rounded-2xl flex  mb-4 ">
 <div className="my-2 mx-2 h-4/5 w-full mt-8">
-    <PieChart  />
+    <PieChart oplist={oplist} />
 
   </div>
 </div>
@@ -143,7 +152,9 @@ export function Balances(account :{account: string}) {
 
       </div>
 
-          <div className="bg-cyan-100 pb-2 pt-2 my-3 rounded-2xl ">
+
+
+          <div className="bg-cyan-100 pb-2 pt-2 my-3 rounded-2xl">
     <h2 className="ml-8 text-black font-bold">{"Chain name"}</h2>
     <div className="flex justify-around mx-80 font-bold -mt-6">
       <div className="flex mr-auto">
@@ -154,6 +165,10 @@ export function Balances(account :{account: string}) {
       </div>
 
     </div>
+
+
+
+
 
      {chain("OPTIMISM", mapBalance, oplist)}
         {chain("BASE", mapBalance, baselist)}
