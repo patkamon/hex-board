@@ -1,3 +1,37 @@
+<h1> Develop in superhack Hackathon</h1>
+
+<h2> Using Covalent for creating the dashboard</h2>
+User: `patkamon`.     <br/>   
+  using endpoint        <br/>   
+<ul>
+  <li> Get token balances for address  </li> 
+<li> Get historical portfolio value over time</li>
+<li> Get recent transactions for address (v3)</li>
+  
+</ul>
+
+
+<h2> LayerZERO deployed contracts</h2>
+
+op to mumbai
+sender op	0x4637e0249e4A8bB885ee891674F42B08A04d74f1
+receiver mumbai 0xca0BF23f1Ea4E08ea053691C0Dd0C066b0c31665	approve already
+
+op to base
+sender op	0x27B1eB846709F582AE86e79795333A5CDef0352f
+receiver base	0xbb951F89EB2aFE1945d0DD4FD0d6EEB3C5Abe999
+
+
+<h2> Worldcoin </h2>
+Using worldcoin as web3 Authentication.
+
+<h2>Chains</h2>
+Hexboard serve information for various chains (Optimism, Base, Zora, Polygon and more soon)
+
+<br/>
+<hr/>
+
+
 <div align="center">
   <a href="https://optimism.io"><img alt="Optimism" src="https://raw.githubusercontent.com/ethereum-optimism/brand-kit/main/assets/svg/OPTIMISM-R.svg" width=320></a>
   <br />
