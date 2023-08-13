@@ -37,7 +37,7 @@ export function Balances(account :{account: string}) {
   const fetchTransaction = async (address: string) => {
     let headers = new Headers();
     // EXPOSE API KEY
-    headers.set('Authorization', "Bearer cqt_rQFY9PtDfbqGrmqD7qkbqC9R3ccJ")
+    headers.set('Authorization', "Bearer ")
 
     const data = await fetch(`  https://api.covalenthq.com/v1/optimism-goerli/address/${address}/transactions_v3/`, {method: 'GET', headers: headers})
     .then((resp) => resp.json())
@@ -50,7 +50,7 @@ export function Balances(account :{account: string}) {
   const fetchData = async (chain : string, address: string, setstate: React.Dispatch<React.SetStateAction<never[]>> ) => {
     let headers = new Headers();
     // EXPOSE API KEY
-    headers.set('Authorization', "Bearer cqt_rQFY9PtDfbqGrmqD7qkbqC9R3ccJ")
+    headers.set('Authorization', "Bearer ")
     const data = await fetch(`https://api.covalenthq.com/v1/${chain}/address/${address}/balances_v2/?`, {method: 'GET', headers: headers})
     .then((resp) => resp.json())
     .then((data) => {
@@ -120,7 +120,7 @@ export function Balances(account :{account: string}) {
   const fetchDataLine = async (chain : string, address: string ) => {
     let headers = new Headers();
     // EXPOSE API KEY
-    headers.set('Authorization', "Bearer cqt_rQFY9PtDfbqGrmqD7qkbqC9R3ccJ")
+    headers.set('Authorization', "Bearer ")
 
 
     const data = await fetch(` https://api.covalenthq.com/v1/optimism-goerli/address/${address}/portfolio_v2/`, {method: 'GET', headers: headers})

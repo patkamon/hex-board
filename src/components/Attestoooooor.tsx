@@ -17,8 +17,7 @@ export function Attestooooooor() {
 
 
   return (
-    <div>
-      <h2>Attestoooooor</h2>
+    <div className="flex justify-center pt-[30vh] pb-[50%]">
       <LoginButton/>
     </div>
   );
