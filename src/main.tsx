@@ -8,6 +8,9 @@ import "./index.css";
 import { App } from "./App";
 import { chains, config } from "./wagmi";
 
+import { Auth0Provider } from '@auth0/auth0-react';
+
+
 /**
  * Root providers and initialization of app
  * @see https://reactjs.org/docs/strict-mode.html
@@ -16,10 +19,18 @@ import { chains, config } from "./wagmi";
  */
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <Auth0Provider
+    domain="dev-apbnxj6ii12vpwrp.us.auth0.com" // autho0 domain
+    clientId="DKmACdfS2OXUV8sDvqnBcobuiJUqzeQQ" // autho0 client
+    authorizationParams={{
+      redirect_uri: "http://localhost:5173/home"
+    }}
+>
     <WagmiConfig config={config}>
       <RainbowKitProvider chains={chains}>
         <App />
       </RainbowKitProvider>
     </WagmiConfig>
+    </Auth0Provider>
   </React.StrictMode>,
 );

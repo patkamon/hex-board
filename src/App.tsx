@@ -2,8 +2,14 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { getAccount } from '@wagmi/core'
 
-import { Balances, LineChart } from "./components";
+import { Attestooooooor, Balances, LineChart } from "./components";
 import "./index.css";
+
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 export function App() {
   /**
@@ -31,9 +37,22 @@ export function App() {
 
       {isConnected && (
         <>
-          <div className="mt-8"/>
-          <Balances account={account.address}/>
-          <div />
+
+
+      {/* <Layout> */}
+      <div className="mt-8"/>
+      <BrowserRouter>
+      <Routes>
+        <Route  path="*" element={ <Attestooooooor />} />
+        <Route  path="/home" element ={ <Balances account={account.address}/>} />
+      {/* </Layout> */}
+      </Routes>
+      </BrowserRouter>
+      <div />
+
+
+
+
         </>
       )}
       </div>
